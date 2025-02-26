@@ -1,0 +1,79 @@
+[
+  {
+    "objectID": "create-dataset.html",
+    "href": "create-dataset.html",
+    "title": "Create the Gapminder dataset",
+    "section": "",
+    "text": "# Import necessary libraries\nimport pandas as pd\nfrom gapminder import gapminder\n\n# Rename 'lifeExp' to 'life_expectancy' and 'gdpPercap' to 'gdp_per_capita'\ngapminder = gapminder.rename(columns={'lifeExp': 'life_expectancy',\n                                      'pop': 'population_millions', \n                                      'gdpPercap': 'gdp_per_capita'})\n\n# Convert population to millions\ngapminder['population_millions'] = gapminder['population_millions'] / 1_000_000\n\n# Create a new pandas DataFrame from the modified gapminder data\ngapminder_df = pd.DataFrame(gapminder)\n\n# Save the DataFrame as a CSV file\ngapminder_df.to_csv('gapminder.csv', index=False)\n\n# Print the first 3 rows of the DataFrame\nprint(gapminder_df.head(3))\n\n       country continent  year  life_expectancy  population_millions  \\\n0  Afghanistan      Asia  1952           28.801             8.425333   \n1  Afghanistan      Asia  1957           30.332             9.240934   \n2  Afghanistan      Asia  1962           31.997            10.267083   \n\n   gdp_per_capita  \n0      779.445314  \n1      820.853030  \n2      853.100710"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "life-gdp.html",
+    "href": "life-gdp.html",
+    "title": "Analyzing the Relationship between Life Expectancy and GDP per capita",
+    "section": "",
+    "text": "We will be looking at the analysis of Life Expectancy and GDP through a scatter plot.\n\n\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('gapminder.csv')\n\ncontinent_colors = {\n    \"Africa\": \"red\",\n    \"Americas\": \"blue\",\n    \"Asia\": \"green\",\n    \"Europe\": \"purple\",\n    \"Oceania\": \"orange\"\n}\n\nplt.figure(figsize=(10, 6))\n\nfor continent, color in continent_colors.items():\n    subset = df[df[\"continent\"] == continent]\n    plt.scatter(subset[\"gdp_per_capita\"], subset[\"life_expectancy\"], alpha=0.6, label=continent, color=color)\n\n\nplt.title(\"Life Expectancy vs GDP per Capita\")\nplt.xlabel(\"GDP per Capita\")\nplt.ylabel(\"Life Expectancy\")\nplt.legend(title=\"Continent\")\n\nplt.show()\n\n\n\n\n\n\n\n\nOpen index.qmd: ```bash nano index.qmd"
+  },
+  {
+    "objectID": "life-gdp.html#visualization",
+    "href": "life-gdp.html#visualization",
+    "title": "Analyzing the Relationship between Life Expectancy and GDP per capita",
+    "section": "",
+    "text": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('gapminder.csv')\n\ncontinent_colors = {\n    \"Africa\": \"red\",\n    \"Americas\": \"blue\",\n    \"Asia\": \"green\",\n    \"Europe\": \"purple\",\n    \"Oceania\": \"orange\"\n}\n\nplt.figure(figsize=(10, 6))\n\nfor continent, color in continent_colors.items():\n    subset = df[df[\"continent\"] == continent]\n    plt.scatter(subset[\"gdp_per_capita\"], subset[\"life_expectancy\"], alpha=0.6, label=continent, color=color)\n\n\nplt.title(\"Life Expectancy vs GDP per Capita\")\nplt.xlabel(\"GDP per Capita\")\nplt.ylabel(\"Life Expectancy\")\nplt.legend(title=\"Continent\")\n\nplt.show()\n\n\n\n\n\n\n\n\nOpen index.qmd: ```bash nano index.qmd"
+  },
+  {
+    "objectID": "country.html",
+    "href": "country.html",
+    "title": "Country Analysis",
+    "section": "",
+    "text": "This page examines how Life Expectancy, GDP per Capita, and Population have changed over time for a specific country, which in this case is the United States. Here we see all three attributes seem to have an increase over time.\n\n\n\n\n# Import necessary libraries\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the Gapminder dataset\ndf = pd.read_csv(\"gapminder.csv\")\n\n# Select a specific country (Change 'United States' to any other country)\nselected_country = \"United States\"\ndf_country = df[df['country'] == selected_country]\n\n# Create figure and subplots\nfig, ax1 = plt.subplots(figsize=(10, 6))\n\n# Plot Life Expectancy\nax1.plot(df_country['year'], df_country['life_expectancy'], color=\"blue\", marker=\"o\", label=\"Life Expectancy\")\nax1.set_ylabel(\"Life Expectancy (Years)\", color=\"blue\")\nax1.tick_params(axis=\"y\", labelcolor=\"blue\")\n\n# Create second y-axis for GDP per Capita\nax2 = ax1.twinx()\nax2.plot(df_country['year'], df_country['gdp_per_capita'], color=\"green\", marker=\"s\", linestyle=\"dashed\", label=\"GDP per Capita\")\nax2.set_ylabel(\"GDP per Capita\", color=\"green\")\nax2.tick_params(axis=\"y\", labelcolor=\"green\")\n\n# Create third y-axis for Population\nax3 = ax1.twinx()\nax3.spines[\"right\"].set_position((\"outward\", 60))\nax3.plot(df_country['year'], df_country['population_millions'], color=\"red\", marker=\"^\", linestyle=\"dotted\", label=\"Population (millions)\")\nax3.set_ylabel(\"Population (millions)\", color=\"red\")\nax3.tick_params(axis=\"y\", labelcolor=\"red\")\n\n# Title and labels\nplt.title(f\"Changes in Life Expectancy, GDP per Capita, and Population for {selected_country}\")\nax1.set_xlabel(\"Year\")\n\n# Show plot\nfig.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nOpen index.qmd: ```bash nano index.qmd"
+  },
+  {
+    "objectID": "country.html#introduction",
+    "href": "country.html#introduction",
+    "title": "Country Analysis",
+    "section": "",
+    "text": "This page examines how Life Expectancy, GDP per Capita, and Population have changed over time for a specific country, which in this case is the United States. Here we see all three attributes seem to have an increase over time."
+  },
+  {
+    "objectID": "country.html#visualization",
+    "href": "country.html#visualization",
+    "title": "Country Analysis",
+    "section": "",
+    "text": "# Import necessary libraries\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the Gapminder dataset\ndf = pd.read_csv(\"gapminder.csv\")\n\n# Select a specific country (Change 'United States' to any other country)\nselected_country = \"United States\"\ndf_country = df[df['country'] == selected_country]\n\n# Create figure and subplots\nfig, ax1 = plt.subplots(figsize=(10, 6))\n\n# Plot Life Expectancy\nax1.plot(df_country['year'], df_country['life_expectancy'], color=\"blue\", marker=\"o\", label=\"Life Expectancy\")\nax1.set_ylabel(\"Life Expectancy (Years)\", color=\"blue\")\nax1.tick_params(axis=\"y\", labelcolor=\"blue\")\n\n# Create second y-axis for GDP per Capita\nax2 = ax1.twinx()\nax2.plot(df_country['year'], df_country['gdp_per_capita'], color=\"green\", marker=\"s\", linestyle=\"dashed\", label=\"GDP per Capita\")\nax2.set_ylabel(\"GDP per Capita\", color=\"green\")\nax2.tick_params(axis=\"y\", labelcolor=\"green\")\n\n# Create third y-axis for Population\nax3 = ax1.twinx()\nax3.spines[\"right\"].set_position((\"outward\", 60))\nax3.plot(df_country['year'], df_country['population_millions'], color=\"red\", marker=\"^\", linestyle=\"dotted\", label=\"Population (millions)\")\nax3.set_ylabel(\"Population (millions)\", color=\"red\")\nax3.tick_params(axis=\"y\", labelcolor=\"red\")\n\n# Title and labels\nplt.title(f\"Changes in Life Expectancy, GDP per Capita, and Population for {selected_country}\")\nax1.set_xlabel(\"Year\")\n\n# Show plot\nfig.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nOpen index.qmd: ```bash nano index.qmd"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Gapminder Dataset Analysis",
+    "section": "",
+    "text": "The Gapminder dataset that has statistics and other information about social, economic, and environmental development at local, national, and global levels.\n\n\n\nLife Expectancy and GDP per Capita\nLife Expectancy and Population\nCountry Analysis"
+  },
+  {
+    "objectID": "index.html#to-explore-the-analyses-here-are-the-links-below",
+    "href": "index.html#to-explore-the-analyses-here-are-the-links-below",
+    "title": "Gapminder Dataset Analysis",
+    "section": "",
+    "text": "Life Expectancy and GDP per Capita\nLife Expectancy and Population\nCountry Analysis"
+  },
+  {
+    "objectID": "life-population.html",
+    "href": "life-population.html",
+    "title": "Analyzing the Relationship between Life Expectancy and Population",
+    "section": "",
+    "text": "We will be looking at the analysis of Life Expectancy and Population through a scatter plot.\n\n\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('gapminder.csv')\n\ncontinent_colors = {\n    \"Africa\": \"red\",\n    \"Americas\": \"blue\",\n    \"Asia\": \"green\",\n    \"Europe\": \"purple\",\n    \"Oceania\": \"orange\"\n}\n\nplt.figure(figsize=(10, 6))\n\nfor continent, color in continent_colors.items():\n    subset = df[df[\"continent\"] == continent]\n    plt.scatter(subset[\"population_millions\"], subset[\"life_expectancy\"], alpha=0.6, label=continent, color=color)\n\n\nplt.title(\"Life Expectancy vs Population\")\nplt.xlabel(\"Population(Millions)\")\nplt.ylabel(\"Life Expectancy\")\nplt.legend(title=\"Continent\")\n\nplt.show()\n\n\n\n\n\n\n\n\nOpen index.qmd: ```bash nano index.qmd"
+  },
+  {
+    "objectID": "life-population.html#visualization",
+    "href": "life-population.html#visualization",
+    "title": "Analyzing the Relationship between Life Expectancy and Population",
+    "section": "",
+    "text": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('gapminder.csv')\n\ncontinent_colors = {\n    \"Africa\": \"red\",\n    \"Americas\": \"blue\",\n    \"Asia\": \"green\",\n    \"Europe\": \"purple\",\n    \"Oceania\": \"orange\"\n}\n\nplt.figure(figsize=(10, 6))\n\nfor continent, color in continent_colors.items():\n    subset = df[df[\"continent\"] == continent]\n    plt.scatter(subset[\"population_millions\"], subset[\"life_expectancy\"], alpha=0.6, label=continent, color=color)\n\n\nplt.title(\"Life Expectancy vs Population\")\nplt.xlabel(\"Population(Millions)\")\nplt.ylabel(\"Life Expectancy\")\nplt.legend(title=\"Continent\")\n\nplt.show()\n\n\n\n\n\n\n\n\nOpen index.qmd: ```bash nano index.qmd"
+  }
+]

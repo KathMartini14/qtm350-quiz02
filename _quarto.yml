@@ -1,0 +1,31 @@
+project:
+  type: website
+  output-dir: docs
+website:
+  title: "Gapminder Dataset Analysis"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - href: life-gdp.qmd
+        text: Life Expectancy and GDP per capita
+      - href: life-population.qmd
+        text: Life Expectancy and Population
+      - href: country.qmd
+        text: Specfic Country Analysis
+    right:
+    - icon: github
+      href: https://github.com/KathMartini14/qtm350-quiz02
+
+format:
+  html:
+    theme:
+      - cosmo
+      - darkly
+    css: styles.css
+    toc: true
+
+
+

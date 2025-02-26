@@ -1,0 +1,42 @@
+---
+title: "Analyzing the Relationship between Life Expectancy and Population"
+format: html
+---
+
+# Introduction:
+We will be looking at the analysis of Life Expectancy and Population through a scatter plot. 
+
+## Visualization
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('gapminder.csv')
+
+continent_colors = {
+    "Africa": "red",
+    "Americas": "blue",
+    "Asia": "green",
+    "Europe": "purple",
+    "Oceania": "orange"
+}
+
+plt.figure(figsize=(10, 6))
+
+for continent, color in continent_colors.items():
+    subset = df[df["continent"] == continent]
+    plt.scatter(subset["population_millions"], subset["life_expectancy"], alpha=0.6, label=continent, color=color)
+
+
+plt.title("Life Expectancy vs Population")
+plt.xlabel("Population(Millions)")
+plt.ylabel("Life Expectancy")
+plt.legend(title="Continent")
+
+plt.show()
+```
+
+Open `index.qmd`:
+```bash
+nano index.qmd

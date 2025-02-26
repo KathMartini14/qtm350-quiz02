@@ -1,0 +1,13 @@
+---
+title: "Gapminder Dataset Analysis"
+format: html
+---
+# Welcome to the Gapminder Analysis Website
+
+The Gapminder dataset that has statistics and other information about social, economic, and environmental development at local, national, and global levels. 
+
+## To explore the analyses, here are the links below:
+- [Life Expectancy and GDP per Capita](life-gdp.qmd)
+- [Life Expectancy and Population](life-population.qmd)
+- [Country Analysis](country.qmd)
+
